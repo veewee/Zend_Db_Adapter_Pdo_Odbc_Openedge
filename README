@@ -1,0 +1,27 @@
+Zend_Db_Adapter_Pdo_Odbc_Openedge
+=================================
+Connect to a Progress database with an OpenEdge ODBC connection.
+This classes require to enable the PHP PDO extension on your server.
+
+Configuration in INI file:
+
+resources.db.adapter = pdo_odbc_openedge
+resources.db.params.driver   = "{Progress OpenEdge 10.2B driver}"
+resources.db.params.host     = "localhost"
+resources.db.params.username = "username"
+resources.db.params.password = "password"
+resources.db.params.dbname   = "dbname"
+resources.db.params.port     = "1234"
+resources.db.params.schema   = "pub"
+resources.db.params.charset  = "iso8859-1"
+
+Initialisation in Bootstrap:
+<?php
+    public function _initDatabaseAdapter()
+    {
+        $this->bootstrap('db');
+        $db = $this->getResource('db');
+        Zend_Db_Table_Abstract::setDefaultAdapter($db);
+        return $db;
+    }	
+?>
